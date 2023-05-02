@@ -1,0 +1,17 @@
+@import "app/styles/sass/_variables.scss";
+
+.onesection {
+  margin-top: 50px;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 5px 0;
+      list-style-type: none;
+      text-align: center;
+    }
+  }
+  @media (max-width: $col-xl) {
+    background-color: #c1c1c1;
+  }
+}

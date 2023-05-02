@@ -1,0 +1,131 @@
+
+// IMPORT SECTION
+
+@import 'node_modules/bootstrap/scss/bootstrap-reboot.scss'
+// Bootstrap Reboot collection
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss'
+// Bootstrap Breakpoints mixin
+@import 'node_modules/bootstrap/scss/bootstrap-grid.scss'
+// Optional Bootstrap Grid
+@import 'node_modules/bootstrap/scss/_utilities.scss'
+// Optional Bootstrap Utilites
+
+// FONTS LOAD SECTION
+
+@mixin font($fname, $fstyle, $fweight, $furl)
+  @font-face
+    font-family: $fname
+    font-style: $fstyle
+    font-weight: $fweight
+    src: url($furl) format('woff2')
+
+@include font('Ubuntu', normal, 400, '../fonts/ubuntu/ubuntu.woff2')
+@include font('Ubuntu', normal, 500, '../fonts/ubuntu/ubuntumedium.woff2')
+@include font('Ubuntu', normal, 700, '../fonts/ubuntu/ubuntubold.woff2')
+
+// GENERAL CSS SETTINGS
+
+::placeholder
+  color: #666
+
+::selection
+  background-color: $accent
+  color: #fff
+
+a:link, a:visited
+  text-decoration: none
+
+a
+  color: inherit
+  font-family: inherit
+
+input, textarea
+  outline: none
+
+  &:focus:required:invalid
+    border-color: red
+
+  &:required:valid
+    border-color: green
+
+html
+  height: 100%
+
+body
+  font-family: $userfont
+  font-size: $fontsize
+  font-style: normal
+  line-height: $lineheight
+  color: $textcolor
+  min-width: 320px
+  position: relative
+  overflow-x: hidden
+  -ms-text-size-adjust: 100%
+  -moz-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  display: flex
+  flex-direction: column
+  height: 100%
+
+body._lock
+  overflow: hidden
+  touch-action: none
+
+h1, h2, h3, h4, h5, h6
+  font-weight: inherit
+  font-size: inherit
+  line-height: inherit
+
+body.scrollnone
+  overflow: hidden
+
+header
+  flex: 0 0 auto
+
+main
+  flex: 1 0 auto
+  overflow: hidden
+
+footer
+  flex: 0 0 auto
+
+.container
+  position: relative
+  margin: 0 auto
+  padding: 0 15px
+  max-width: $col-xxl
+  width: 100%
+
+  @media (min-width: $sm)
+    max-width: $col-sm
+
+  @media (min-width: $md)
+    max-width: $col-md
+
+  @media (min-width: $lg)
+    max-width: $col-lg
+
+  @media (min-width: $xl)
+    max-width: $col-xl
+
+  @media (min-width: $xxl)
+    max-width: $col-xxl
+
+img
+  height: auto
+  max-width: 100%
+  object-fit: cover
+
+a
+  text-decoration: none
+
+section
+  overflow: hidden
+
+*
+  padding: 0
+  margin: 0
+  border: 0
+  outline: 0
