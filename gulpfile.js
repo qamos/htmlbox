@@ -16,6 +16,10 @@ import less          from 'gulp-less'
 import lessglob      from 'gulp-less-glob'
 import styl          from 'gulp-stylus'
 
+import webpackStream from 'webpack-stream'
+import webpack       from 'webpack'
+import TerserPlugin  from 'terser-webpack-plugin'
+
 import cheerio       from 'gulp-cheerio'
 import replace       from 'gulp-replace'
 
@@ -45,7 +49,39 @@ function browsersync() {
 
 function scripts() {
 	return src(['app/js/*.js', '!app/js/*.min.js'])
-
+		.pipe(webpackStream({
+			mode: 'production',
+			performance: { hints: false },
+			plugins: [
+				new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' }), // jQuery (npm i jquery)
+			],
+			module: {
+				rules: [
+					{
+						test: /\.m?js$/,
+						exclude: /(node_modules)/,
+						use: {
+							loader: 'babel-loader',
+							options: {
+								presets: ['@babel/preset-env'],
+								plugins: ['babel-plugin-root-import']
+							}
+						}
+					}
+				]
+			},
+			optimization: {
+				minimize: true,
+				minimizer: [
+					new TerserPlugin({
+						terserOptions: { format: { comments: false } },
+						extractComments: false
+					})
+				]
+			},
+		}, webpack)).on('error', (err) => {
+			this.emit('end')
+		})
 		.pipe(concat('app.min.js'))
 		.pipe(dest('app/js'))
 		.pipe(browserSync.stream())
