@@ -1,8 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-   
-
-});
+import '~/node_modules/swiper/swiper-bundle.js'
 
 
 
